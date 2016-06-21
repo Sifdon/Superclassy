@@ -1,0 +1,47 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">#1C376C</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="colorControlNormal">#1C376C</item>
+        <item name="colorControlActivated">#1C376C</item>
+        <item name="colorControlHighlight">#1C376C</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="orangeButton" parent="Theme.AppCompat.Light.NoActionBar" tools:targetApi="21">
+        <!-- Customize your theme here. -->
+        <item name="android:background">#A1B9D5</item>
+        <item name="android:textColor">#FFF</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="colorControlNormal">@color/orange</item>
+        <item name="colorControlActivated">@color/darkOrange</item>
+        <item name="colorControlHighlight">@color/darkOrange</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:colorButtonNormal">@color/orange</item>
+    </style>
+
+    <style name="darkButton" parent="Theme.AppCompat.Light.NoActionBar" tools:targetApi="21">
+        <!-- Customize your theme here. -->
+        <item name="android:background">#A1B9D5</item>
+        <item name="android:textColor">#FFF</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="colorControlNormal">@color/blue</item>
+        <item name="colorControlActivated">@color/darkBlue</item>
+        <item name="colorControlHighlight">@color/darkBlue</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:colorButtonNormal">@color/blue</item>
+    </style>
+
+</resources>

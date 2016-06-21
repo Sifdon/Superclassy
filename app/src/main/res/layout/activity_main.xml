@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="16dp"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context="clairecw.example.admin.superclassy.MainActivity"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:background="@drawable/bridge">
+
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/logowhite"
+        android:background="@null"
+        android:layout_marginBottom="-20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Cliqd"
+        android:id="@+id/name"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/abc_text_size_display_1_material"
+        android:textStyle="italic"
+        android:typeface="serif"
+        android:paddingBottom="20dp"
+        android:background="#00000000"
+        android:textColor="#FFFFFF"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:layout_gravity="center_horizontal"
+        android:hint="Email"
+        android:textColorHint="#FFFFFF"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/password"
+        android:layout_gravity="center_horizontal"
+        android:hint="Password"
+        android:textColorHint="#FFFFFF"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:text="Log in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/login"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:theme="@style/orangeButton"
+        />
+
+    <Button
+        android:text="Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/reg"
+        android:layout_gravity="center_horizontal"
+        android:theme="@style/orangeButton" />
+
+</LinearLayout>

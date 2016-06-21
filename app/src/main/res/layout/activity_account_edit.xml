@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:clickable="true"
+    android:theme="@style/AppTheme"
+    tools:context="clairecw.example.admin.superclassy.AccountEdit">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:id="@+id/topView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="110dp">
+
+                <ImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:id="@+id/profilePic"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/user"
+                    android:layout_marginRight="20dp"
+                    android:background="@null"/>
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:text="Upload a \nprofile picture!"
+                    android:textSize="17dp"
+                    android:textAlignment="center"
+                    android:textColor="#FFF"
+                    android:layout_alignParentBottom="true"
+                    android:background="#B3AAAAAA"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Log out"
+                    android:layout_alignParentRight="true"
+                    android:theme="@style/orangeButton"
+                    android:id="@+id/logout"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username"
+                    android:id="@+id/username"
+                    android:textSize="24dp"
+                    android:layout_above="@+id/linear"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linear"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add a tag!"
+                        android:id="@+id/tagLabel" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <ImageButton
+            android:src="@drawable/add"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:id="@+id/addButton"
+            android:background="@null"
+            android:layout_gravity="right" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/desc"
+            android:hint="Add a description!"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:singleLine="true"
+            android:imeOptions="actionDone"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/desc">
+
+
+            <ImageButton
+                android:layout_height="40dp"
+                android:layout_width="40dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/refresh"
+                android:background="@null"
+                android:id="@+id/refreshButton"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:id="@+id/save"
+                android:theme="@style/darkButton"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:layout_below="@+id/topView"
+        android:layout_above="@+id/imageView"
+        android:id="@+id/linearLayout">
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/gridView"
+            android:layout_gravity="center_horizontal"
+            android:numColumns="3"
+            android:columnWidth="115dp"
+            android:background="#FFFFFF"
+            android:verticalSpacing="5dp"
+            android:horizontalSpacing="5dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/nav"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:layout_alignParentBottom="true" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:id="@+id/uploadButton"
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:id="@+id/homeButton"
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toLeftOf="@+id/searchButton"
+        android:layout_toStartOf="@+id/searchButton" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:id="@+id/searchButton"
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/uploadButton"
+        android:layout_toStartOf="@+id/uploadButton" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:id="@+id/groupsButton"
+        android:background="@null"
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/uploadButton" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:id="@+id/profileButton"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/groupsButton" />
+
+
+</RelativeLayout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context="clairecw.example.admin.superclassy.CreateGroup">
+
+    <ImageButton
+        android:id="@+id/close"
+        android:src="@drawable/close"
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:background="@null"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+        <View
+            android:layout_height="100dp"
+            android:layout_width="100dp"
+            android:background="#fff"
+            android:id="@+id/color"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose a \ncategory"
+            android:layout_centerVertical="true"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            android:textColor="#FFF"
+            android:background="#B3AAAAAA"/>
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/nameText"
+        android:hint="Group Name"
+        android:layout_below="@+id/close"
+        android:layout_toRightOf="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/relativeLayout" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Founder:"
+        android:textSize="18dp"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/nameText"
+        android:layout_toRightOf="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/relativeLayout" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="Group Description"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        android:id="@+id/create"
+        android:layout_below="@+id/editText2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:theme="@style/darkButton"/>
+
+
+</RelativeLayout>
