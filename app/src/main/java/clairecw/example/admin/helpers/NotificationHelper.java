@@ -24,10 +24,17 @@ public class NotificationHelper {
 
     private WeakReference<Context> mContext;
     private int code;
+    private String groupId;
 
     public NotificationHelper(Context context, int code) {
         this.code = code;
         this.mContext = new WeakReference<>(context);
+    }
+
+    public NotificationHelper(Context context, int code, String gid) {
+        this.code = code;
+        this.mContext = new WeakReference<>(context);
+        this.groupId = gid;
     }
 
     public void createUploadingNotification() {
@@ -47,18 +54,27 @@ public class NotificationHelper {
 
     }
 
-    public void createUploadedNotification(ImageResponse response, String desc) {
+    public void createUploadedNotification(ImageResponse response, String desc, String title) {
         final Firebase myFirebaseRef = new Firebase("https://superclassy.firebaseio.com/");
         AuthData user = myFirebaseRef.getAuth();
 
-        if (code == 0) {
+        if (code == 0) {        // new file upload from user account
             Firebase newRef = myFirebaseRef.child("users").child(user.getUid()).child("files").push();
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("url", response.data.link);
             map.put("desc", desc);
             newRef.setValue(map);
         }
-        else {
+        if (code == 1) {        // new post in group
+            Firebase newRef = myFirebaseRef.child("groups").child(groupId).child("posts").push();
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("url", response.data.link);
+            map.put("description", desc);
+            map.put("title", title);
+            map.put("author", user.getUid());
+            newRef.setValue(map);
+        }
+        else {                  // profile picture upload
             myFirebaseRef.child("users").child(user.getUid()).child("profPic").setValue(response.data.link);
         }
 
@@ -67,10 +83,6 @@ public class NotificationHelper {
         mBuilder.setContentTitle(mContext.get().getString(clairecw.example.admin.superclassy.R.string.notifaction_success));
 
         mBuilder.setContentText(response.data.link);
-        //Toast.makeText(mContext.get(), response.data.link, Toast.LENGTH_LONG).show();
-
-        //mBuilder.setColor(mContext.get().getResources().getColor(R.color.primary));
-
 
         Intent resultIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.data.link));
         PendingIntent intent = PendingIntent.getActivity(mContext.get(), 0, resultIntent, 0);

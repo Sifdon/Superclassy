@@ -5,29 +5,38 @@
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
     android:background="#FFFFFF"
-    tools:context="clairecw.example.admin.superclassy.EditTags">
+    tools:context="clairecw.example.admin.superclassy.EditTags"
+    android:padding="@dimen/activity_horizontal_margin">
+
 
     <ImageButton
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/close"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
         android:id="@+id/close"
+        android:src="@drawable/close"
+        android:background="@null"
+        android:layout_height="40dp"
+        android:layout_width="40dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:background="@null"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
 
     <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/list"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:background="#FFFFFF"/>
+        android:layout_below="@+id/close"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/save"
+        android:theme="@style/darkButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/list"
+        android:layout_alignEnd="@+id/list" />
 </RelativeLayout>

@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 public class EditWork extends ActionBarActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
-    Button save;
+    Button save, close;
     EditText descBox;
     ImageView image;
     HashMap<String, Object> file;
@@ -39,6 +39,9 @@ public class EditWork extends ActionBarActivity implements View.OnClickListener,
 
         save = (Button)findViewById(R.id.button);
         save.setOnClickListener(this);
+
+        close = (Button)findViewById(R.id.close);
+        close.setOnClickListener(this);
 
         descBox = (EditText)findViewById(R.id.editText);
         descBox.setOnFocusChangeListener(this);
@@ -79,6 +82,9 @@ public class EditWork extends ActionBarActivity implements View.OnClickListener,
             myFirebaseRef.updateChildren(file);
             Intent intent = new Intent(EditWork.this, AccountEdit.class);
             startActivity(intent);
+            finish();
+        }
+        if (v == close) {
             finish();
         }
     }

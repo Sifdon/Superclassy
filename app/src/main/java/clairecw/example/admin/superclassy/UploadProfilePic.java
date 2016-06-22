@@ -61,7 +61,7 @@ public class UploadProfilePic extends ActionBarActivity implements View.OnClickL
         if (v == save) {
             if (chosenFile == null) return;
             createUpload(chosenFile);
-            new UploadService(this).Execute(upload, new UiCallback(), 1);
+            new UploadService(this).Execute(upload, new UiCallback(), -1);
             Intent myIntent = new Intent(this, AccountEdit.class);
             startActivity(myIntent);
             finish();

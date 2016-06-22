@@ -18,11 +18,17 @@ import retrofit.mime.TypedFile;
 public class UploadService {
     public final static String TAG = UploadService.class.getSimpleName();
     NotificationHelper notificationHelper;
+    String groupId = "";
 
     private WeakReference<Context> mContext;
 
     public UploadService(Context context) {
         this.mContext = new WeakReference<>(context);
+    }
+
+    public UploadService(Context context, String gid) {
+        this.mContext = new WeakReference<>(context);
+        groupId = gid;
     }
 
     public void Execute(Upload upload, Callback<ImageResponse> callback, int code) {
@@ -34,13 +40,15 @@ public class UploadService {
             return;
         }
 
-        notificationHelper = new NotificationHelper(mContext.get(), code);
+        if (groupId.isEmpty()) notificationHelper = new NotificationHelper(mContext.get(), code);
+        else notificationHelper = new NotificationHelper(mContext.get(), code, groupId);
 
         notificationHelper.createUploadingNotification();
 
         RestAdapter restAdapter = buildRestAdapter();
 
         final String descString = upload.description;
+        final String descTitle = upload.title;
 
         restAdapter.create(ImgurAPI.class).postImage(
                 Constants.getClientAuth(),
@@ -64,7 +72,7 @@ public class UploadService {
                         Notify image was uploaded successfully
                         */
                         if (imageResponse.success) {
-                            notificationHelper.createUploadedNotification(imageResponse, descString);
+                            notificationHelper.createUploadedNotification(imageResponse, descString, descTitle);
                         }
                     }
 

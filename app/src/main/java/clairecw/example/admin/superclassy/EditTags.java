@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
  */
 public class EditTags extends ActionBarActivity implements View.OnClickListener {
 
-
+    Button save;
     AuthData user;
     ImageButton closeButton;
     ListView list;
@@ -42,6 +43,9 @@ public class EditTags extends ActionBarActivity implements View.OnClickListener 
 
         closeButton = (ImageButton)(findViewById(R.id.close));
         closeButton.setOnClickListener(this);
+
+        save = (Button)(findViewById(R.id.save));
+        save.setOnClickListener(this);
 
         for (int i = 0; i < allTags.length; i++) {
             imageId[i] = android.R.color.transparent;
@@ -104,13 +108,18 @@ public class EditTags extends ActionBarActivity implements View.OnClickListener 
     }
 
     public void onClick(View v) {
-        final Firebase myFirebaseRef = new Firebase("https://superclassy.firebaseio.com/");
-        user = myFirebaseRef.getAuth();
+        if (v == closeButton) {
+            finish();
+        }
+        if (v == save) {
+            final Firebase myFirebaseRef = new Firebase("https://superclassy.firebaseio.com/");
+            user = myFirebaseRef.getAuth();
 
-        myFirebaseRef.child("users").child(user.getUid()).child("tags").setValue(tags);
+            myFirebaseRef.child("users").child(user.getUid()).child("tags").setValue(tags);
 
-        Intent myIntent = new Intent(EditTags.this, AccountEdit.class);
-        startActivity(myIntent);
-        finish();
+            Intent myIntent = new Intent(EditTags.this, AccountEdit.class);
+            startActivity(myIntent);
+            finish();
+        }
     }
 }

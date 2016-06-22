@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.client.AuthData;
@@ -27,10 +28,13 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
 
     AuthData user;
     TextView groupName, description, category, founder;
-    ArrayList<String> fileIds = new ArrayList<String>();
+    final Firebase myFirebaseRef = new Firebase("https://superclassy.firebaseio.com/");
+    String value;
     ArrayList<String> members;
-    Button join;
-    ImageButton close;
+    Button join, post;
+    ImageButton close, refresh;
+    ListView postList;
+    boolean isMember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +42,12 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
         setContentView(R.layout.activity_view_group);
 
         Bundle extras = getIntent().getExtras();
-        final String value = extras.getString("groupId");
+        value = extras.getString("groupId");
 
         close = (ImageButton)findViewById(R.id.close);
         close.setOnClickListener(this);
 
         Firebase.setAndroidContext(this);
-        final Firebase myFirebaseRef = new Firebase("https://superclassy.firebaseio.com/");
         user = myFirebaseRef.getAuth();
         if (user == null) {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
@@ -59,6 +62,11 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
 
         join = (Button) findViewById(R.id.join);
         join.setOnClickListener(this);
+
+        post = (Button) findViewById(R.id.post);
+        post.setOnClickListener(this);
+
+        postList = (ListView)findViewById(R.id.listView);
 
         myFirebaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -79,9 +87,11 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
                 members = (ArrayList<String>)snapshot.child("groups").child(value).child("members").getValue();
 
                 if (members.contains(user.getUid())) {
+                    isMember = true;
                     join.setEnabled(false);
                     join.setBackgroundColor(Color.parseColor("#CCCCCC"));
                     join.setText("Joined");
+                    postList.setVisibility(View.VISIBLE);
                     //join.setBackgroundColor();
                 }
 
@@ -89,6 +99,28 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
                 String founderName = (String)snapshot.child("users").child(founderId).child("firstName").getValue() + " " +
                         (String)snapshot.child("users").child(founderId).child("lastName").getValue();
                 if (founderName != null) founder.setText("Founder: " + founderName);
+
+                ArrayList<String> titles = new ArrayList<String>();
+                ArrayList<String> descriptions = new ArrayList<String>();
+                ArrayList<String> urls = new ArrayList<String>();
+                ArrayList<String> authors = new ArrayList<String>();
+
+                HashMap<String, Object> posts = (HashMap<String, Object>)snapshot.child("groups").child(value).child("posts").getValue();
+                if (posts != null) {
+                    for (Map.Entry<String, Object> entry : posts.entrySet()) {
+                        HashMap<String, String> file = (HashMap<String, String>) entry.getValue();
+                        titles.add(file.get("title"));
+                        descriptions.add(file.get("description"));
+                        urls.add(file.get("url"));
+                        String firstName = (String)snapshot.child("users").child(file.get("author")).child("firstName").getValue();
+                        String lastName = (String)snapshot.child("users").child(file.get("author")).child("lastName").getValue();
+                        authors.add(firstName + " " + lastName);
+                    }
+                }
+
+                //System.out.println
+
+                postList.setAdapter(new PostAdapter(ViewGroup.this, titles, urls, descriptions, authors));
             }
 
             public void onCancelled(FirebaseError firebaseError) {
@@ -100,8 +132,24 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
         if (v == close) {
             finish();
         }
+        if (v == refresh) {
+
+        }
         if (v == join) {
-            
+            members.add(user.getUid());
+            myFirebaseRef.child("groups").child(value).child("members").setValue(members);
+
+            isMember = true;
+            join.setEnabled(false);
+            join.setBackgroundColor(Color.parseColor("#CCCCCC"));
+            join.setText("Joined");
+
+            postList.setVisibility(View.VISIBLE);
+        }
+        if (v == post) {
+            Intent intent = new Intent(ViewGroup.this, NewPost.class);
+            intent.putExtra("groupId", value);
+            startActivity(intent);
         }
     }
 }

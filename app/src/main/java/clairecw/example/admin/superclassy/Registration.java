@@ -44,6 +44,8 @@ public class Registration extends ActionBarActivity implements View.OnClickListe
         password.setOnFocusChangeListener(this);
         email.setOnFocusChangeListener(this);
         checkbox = (CheckBox)(findViewById(R.id.checkBox));
+        firstName = (EditText)findViewById(R.id.firstName);
+        lastName = (EditText)findViewById(R.id.lastName);
 
         TextView text = (TextView)findViewById(R.id.textView3);
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/AvenirNext-Regular.ttf");
