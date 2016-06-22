@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.firebase.client.AuthData;
@@ -22,7 +23,8 @@ import java.util.HashMap;
 
 public class EditWork extends ActionBarActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
-    Button save, close;
+    Button save;
+    ImageButton close;
     EditText descBox;
     ImageView image;
     HashMap<String, Object> file;
@@ -40,7 +42,7 @@ public class EditWork extends ActionBarActivity implements View.OnClickListener,
         save = (Button)findViewById(R.id.button);
         save.setOnClickListener(this);
 
-        close = (Button)findViewById(R.id.close);
+        close = (ImageButton)findViewById(R.id.close);
         close.setOnClickListener(this);
 
         descBox = (EditText)findViewById(R.id.editText);
