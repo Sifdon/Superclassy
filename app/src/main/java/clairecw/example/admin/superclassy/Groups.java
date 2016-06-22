@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.firebase.client.AuthData;
@@ -26,6 +27,7 @@ public class Groups extends ActionBarActivity implements View.OnClickListener {
 
     Button uploadButton, homeButton, searchButton, profileButton;
     Button createButton;
+    ImageButton refresh;
     ListView list;
 
     ArrayList<String> nameList = new ArrayList<String>();
@@ -55,6 +57,9 @@ public class Groups extends ActionBarActivity implements View.OnClickListener {
 
         createButton = (Button)findViewById(R.id.createButton);
         createButton.setOnClickListener(this);
+
+        refresh = (ImageButton)findViewById(R.id.refresh);
+        refresh.setOnClickListener(this);
 
         list = (ListView)findViewById(R.id.listView);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,6 +96,7 @@ public class Groups extends ActionBarActivity implements View.OnClickListener {
                             case 3: colors.add("#E2485A"); break;
                             case 4: colors.add("#33B5E5"); break;
                             case 5: colors.add("AA66CC"); break;
+                            default: colors.add("#FFFFFF"); break;
                         }
                     }
                 }
@@ -127,6 +133,11 @@ public class Groups extends ActionBarActivity implements View.OnClickListener {
         if (v == createButton) {
             Intent intent = new Intent(this, CreateGroup.class);
             startActivity(intent);
+        }
+        if (v == refresh) {
+            Intent intent = new Intent(this, Groups.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

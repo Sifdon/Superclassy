@@ -48,6 +48,9 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
         close = (ImageButton)findViewById(R.id.close);
         close.setOnClickListener(this);
 
+        refresh = (ImageButton)findViewById(R.id.refresh);
+        refresh.setOnClickListener(this);
+
         Firebase.setAndroidContext(this);
         user = myFirebaseRef.getAuth();
         if (user == null) {
@@ -83,6 +86,7 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
                     case 3: type = "Career"; break;
                     case 4: type = "Miscellaneous Interest"; break;
                     case 5: type = "Academic Subject"; break;
+                    default: type = "Other"; break;
                 }
                 category.setText(type);
                 members = (ArrayList<String>)snapshot.child("groups").child(value).child("members").getValue();
@@ -137,7 +141,9 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
             finish();
         }
         if (v == refresh) {
-
+            Intent intent = new Intent(this, ViewGroup.class);
+            startActivity(intent);
+            finish();
         }
         if (v == join) {
             members.add(user.getUid());
