@@ -35,6 +35,7 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
     ImageButton close, refresh;
     ListView postList;
     boolean isMember;
+    ArrayList<String> groups;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,9 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
                 }
                 category.setText(type);
                 members = (ArrayList<String>)snapshot.child("groups").child(value).child("members").getValue();
+
+                groups = (ArrayList<String>)snapshot.child("users").child(user.getUid()).child("groups").getValue();
+                if (groups == null) groups = new ArrayList<String>();
 
                 if (members.contains(user.getUid())) {
                     isMember = true;
@@ -138,6 +142,10 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
         if (v == join) {
             members.add(user.getUid());
             myFirebaseRef.child("groups").child(value).child("members").setValue(members);
+
+            groups.add(value);
+            Firebase userRef = myFirebaseRef.child("users").child(user.getUid()).child("groups");
+            userRef.setValue(groups);
 
             isMember = true;
             join.setEnabled(false);

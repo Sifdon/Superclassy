@@ -31,6 +31,7 @@ public class CreateGroup extends ActionBarActivity implements View.OnClickListen
     AuthData user;
     TextView founder;
     int type;
+    ArrayList<String> groups;
     final Firebase myFirebaseRef = new Firebase("https://superclassy.firebaseio.com/");
 
     @Override
@@ -69,8 +70,12 @@ public class CreateGroup extends ActionBarActivity implements View.OnClickListen
                     startActivity(intent);
                 }
 
-                Object uName = snapshot.child("users").child(user.getUid()).child("username").getValue();
-                if (uName != null) CreateGroup.this.founder.setText("Founder: " + uName.toString());
+                String firstName = (String)snapshot.child("users").child(user.getUid()).child("firstName").getValue();
+                String lastName = (String)snapshot.child("users").child(user.getUid()).child("lastName").getValue();
+                CreateGroup.this.founder.setText("Founder: " + firstName + " " + lastName);
+
+                groups = (ArrayList<String>)snapshot.child("users").child(user.getUid()).child("groups").getValue();
+                if (groups == null) groups = new ArrayList<String>();
             }
 
             public void onCancelled(FirebaseError firebaseError) {
@@ -101,7 +106,6 @@ public class CreateGroup extends ActionBarActivity implements View.OnClickListen
 
             newRef.setValue(map);
 
-            ArrayList<String> groups = new ArrayList<String>();
             groups.add(newRef.getKey());
             Firebase userRef = myFirebaseRef.child("users").child(user.getUid()).child("groups");
             userRef.setValue(groups);
