@@ -95,7 +95,7 @@ public class Groups extends ActionBarActivity implements View.OnClickListener {
                             case 2: colors.add("#FFBB33"); break;
                             case 3: colors.add("#E2485A"); break;
                             case 4: colors.add("#33B5E5"); break;
-                            case 5: colors.add("AA66CC"); break;
+                            case 5: colors.add("#AA66CC"); break;
                             default: colors.add("#FFFFFF"); break;
                         }
                     }

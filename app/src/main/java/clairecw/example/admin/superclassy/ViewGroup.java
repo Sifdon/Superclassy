@@ -142,6 +142,7 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
         }
         if (v == refresh) {
             Intent intent = new Intent(this, ViewGroup.class);
+            intent.putExtra("groupId", value);
             startActivity(intent);
             finish();
         }
