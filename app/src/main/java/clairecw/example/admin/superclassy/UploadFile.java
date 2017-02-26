@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -33,7 +36,6 @@ public class UploadFile extends ActionBarActivity implements View.OnClickListene
     ImageButton uploadButton, close;
     Button save;
     EditText descBox;
-    Button homeButton, searchButton, groupsButton, profileButton;
 
     private Upload upload; // Upload object containing image and meta data
     private File chosenFile; //chosen file from intent
@@ -43,21 +45,44 @@ public class UploadFile extends ActionBarActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_file);
 
-        homeButton = (Button)findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(this);
-        homeButton.setBackgroundColor(Color.TRANSPARENT);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottom_navigation);
 
-        searchButton = (Button)findViewById(R.id.searchButton);
-        searchButton.setOnClickListener(this);
-        searchButton.setBackgroundColor(Color.TRANSPARENT);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Intent myIntent;
+                        switch (item.getItemId()) {
+                            case R.id.action_home:
+                                myIntent = new Intent(getBaseContext(), Dashboard.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
+                            case R.id.action_search:
+                                myIntent = new Intent(getBaseContext(), Search.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
+                            case R.id.action_upload:
+                                break;
+                            case R.id.action_groups:
+                                myIntent = new Intent(getBaseContext(), Groups.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
+                            case R.id.action_account:
+                                myIntent = new Intent(getBaseContext(), AccountEdit.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
 
-        groupsButton = (Button)findViewById(R.id.groupsButton);
-        groupsButton.setOnClickListener(this);
-        groupsButton.setBackgroundColor(Color.TRANSPARENT);
-
-        profileButton = (Button)findViewById(R.id.profileButton);
-        profileButton.setOnClickListener(this);
-        profileButton.setBackgroundColor(Color.TRANSPARENT);
+                        }
+                        return true;
+                    }
+                });
+        View view = bottomNavigationView.findViewById(R.id.action_upload);
+        view.performClick();
 
         uploadButton = (ImageButton)findViewById(R.id.imageButton);
         uploadButton.setOnClickListener(this);
@@ -94,26 +119,6 @@ public class UploadFile extends ActionBarActivity implements View.OnClickListene
             new UploadService(this).Execute(upload, new UiCallback(), 0);
             Intent myIntent = new Intent(this, AccountEdit.class);
             startActivity(myIntent);
-            finish();
-        }
-        if (v == homeButton) {
-            Intent intent = new Intent(this, Dashboard.class);
-            startActivity(intent);
-            finish();
-        }
-        if (v == searchButton) {
-            Intent myIntent = new Intent(this, Search.class);
-            startActivity(myIntent);
-            finish();
-        }
-        if (v == groupsButton) {
-            Intent intent = new Intent(this, Groups.class);
-            startActivity(intent);
-            finish();
-        }
-        if (v == profileButton) {
-            Intent intent = new Intent(this, AccountEdit.class);
-            startActivity(intent);
             finish();
         }
     }

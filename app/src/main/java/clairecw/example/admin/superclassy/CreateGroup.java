@@ -3,6 +3,7 @@ package clairecw.example.admin.superclassy;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -119,16 +120,17 @@ public class CreateGroup extends ActionBarActivity implements View.OnClickListen
 
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
-                String result = data.getStringExtra("result");
-                switch (result) {
-                    case "#ff99cc00": type = 1; break;
-                    case "#ffffbb33": type = 2; break;
-                    case "#ffe2485a": type = 3; break;
-                    case "#ff33b5e5": type = 4; break;
-                    case "#ffaa66cc": type = 5; break;
+                int type = Integer.parseInt(data.getStringExtra("result"));
+                int draw = -1;
+                switch (type) {
+                    case 1: draw = R.drawable.proj; break;
+                    case 2: draw = R.drawable.sport; break;
+                    case 3: draw = R.drawable.biz; break;
+                    case 4: draw = R.drawable.interest; break;
+                    case 5: draw = R.drawable.subject; break;
 
                 }
-                color.setBackgroundColor(Color.parseColor(result));
+                color.setBackground(ContextCompat.getDrawable(CreateGroup.this, draw));
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result

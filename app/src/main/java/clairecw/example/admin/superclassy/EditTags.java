@@ -116,6 +116,10 @@ public class EditTags extends ActionBarActivity implements View.OnClickListener 
             user = myFirebaseRef.getAuth();
 
             myFirebaseRef.child("users").child(user.getUid()).child("tags").setValue(tags);
+            ArrayList<String> test = new ArrayList<String>();
+            test.add("0c7f882a-3502-4be0-a8ff-f6e7e642f05c");
+            test.add("949ae296-0f17-4c14-9a3c-5e9fec6d6a7a");
+            myFirebaseRef.child("users").child(user.getUid()).child("following").setValue(test);
 
             Intent myIntent = new Intent(EditTags.this, AccountEdit.class);
             startActivity(myIntent);

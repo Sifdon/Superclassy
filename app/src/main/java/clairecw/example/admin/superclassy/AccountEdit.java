@@ -1,12 +1,17 @@
 package clairecw.example.admin.superclassy;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -34,7 +39,6 @@ import com.squareup.picasso.Picasso;
 
 public class AccountEdit extends ActionBarActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
-    Button uploadButton, homeButton, searchButton, groupsButton;
     Button saveButton, logout;
     EditText descBox;
     TextView username, tagLabel;
@@ -49,21 +53,44 @@ public class AccountEdit extends ActionBarActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_edit);
 
-        uploadButton = (Button)findViewById(R.id.uploadButton);
-        uploadButton.setOnClickListener(this);
-        uploadButton.setBackgroundColor(Color.TRANSPARENT);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottom_navigation);
 
-        homeButton = (Button)findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(this);
-        homeButton.setBackgroundColor(Color.TRANSPARENT);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Intent myIntent;
+                        switch (item.getItemId()) {
+                            case R.id.action_home:
+                                myIntent = new Intent(getBaseContext(), Dashboard.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
+                            case R.id.action_search:
+                                myIntent = new Intent(getBaseContext(), Search.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
+                            case R.id.action_upload:
+                                myIntent = new Intent(getBaseContext(), UploadFile.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
+                            case R.id.action_groups:
+                                myIntent = new Intent(getBaseContext(), Groups.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
+                            case R.id.action_account:
+                                break;
 
-        searchButton = (Button)findViewById(R.id.searchButton);
-        searchButton.setOnClickListener(this);
-        searchButton.setBackgroundColor(Color.TRANSPARENT);
-
-        groupsButton = (Button)findViewById(R.id.groupsButton);
-        groupsButton.setOnClickListener(this);
-        groupsButton.setBackgroundColor(Color.TRANSPARENT);
+                        }
+                        return true;
+                    }
+                });
+        View view = bottomNavigationView.findViewById(R.id.action_account);
+        view.performClick();
 
         profile = (ImageView)findViewById(R.id.profilePic);
         profile.setOnClickListener(this);
@@ -156,8 +183,6 @@ public class AccountEdit extends ActionBarActivity implements View.OnClickListen
                         HashMap<String, String> file = (HashMap<String, String>) entry.getValue();
                         fileIds.add(entry.getKey());
                         images[n] = file.get("url");
-                        System.out.println(file.get("url"));
-                        System.out.println(images[n]);
                         ListItem newsData = new ListItem();
                         newsData.setUrl(images[n]);
                         listData.add(newsData);
@@ -176,24 +201,6 @@ public class AccountEdit extends ActionBarActivity implements View.OnClickListen
     }
 
     public void onClick(View v) {
-        if (v == uploadButton) {
-            Intent myIntent = new Intent(this, UploadFile.class);
-            startActivity(myIntent);
-        }
-        if (v == homeButton) {
-            Intent intent = new Intent(this, Dashboard.class);
-            startActivity(intent);
-            finish();
-        }
-        if (v == searchButton) {
-            Intent myIntent = new Intent(this, Search.class);
-            startActivity(myIntent);
-        }
-        if (v == groupsButton) {
-            Intent intent = new Intent(this, Groups.class);
-            startActivity(intent);
-            finish();
-        }
 
         if (v == addButton) {
             Intent myIntent = new Intent(this, EditTags.class);
@@ -221,12 +228,27 @@ public class AccountEdit extends ActionBarActivity implements View.OnClickListen
             finish();
         }
         if (v == logout) {
-            // confirmation
-            final Firebase myFirebaseRef = new Firebase("https://superclassy.firebaseio.com/");
-            myFirebaseRef.unauth();
-            Intent myIntent = new Intent(this, MainActivity.class);
-            startActivity(myIntent);
-            finish();
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            final Firebase myFirebaseRef = new Firebase("https://superclassy.firebaseio.com/");
+                            myFirebaseRef.unauth();
+                            Intent myIntent = new Intent(AccountEdit.this, MainActivity.class);
+                            startActivity(myIntent);
+                            finish();
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            break;
+                    }
+                }
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(AccountEdit.this);
+            builder.setMessage("Sign out?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
         }
     }
 

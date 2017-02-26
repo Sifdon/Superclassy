@@ -30,6 +30,7 @@ public class EditWork extends ActionBarActivity implements View.OnClickListener,
     HashMap<String, Object> file;
     final Firebase myFirebaseRef = new Firebase("https://superclassy.firebaseio.com/");
     final AuthData user = myFirebaseRef.getAuth();
+    String value = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class EditWork extends ActionBarActivity implements View.OnClickListener,
         setContentView(R.layout.activity_edit_work);
 
         Bundle extras = getIntent().getExtras();
-        final String value = extras.getString("fileId");
+        value = extras.getString("fileId");
 
         save = (Button)findViewById(R.id.button);
         save.setOnClickListener(this);
@@ -81,7 +82,7 @@ public class EditWork extends ActionBarActivity implements View.OnClickListener,
     public void onClick(View v) {
         if (v == save) {
             file.put("desc", descBox.getText().toString());
-            myFirebaseRef.updateChildren(file);
+            myFirebaseRef.child("users").child(user.getUid()).child("files").child(value).updateChildren(file);
             Intent intent = new Intent(EditWork.this, AccountEdit.class);
             startActivity(intent);
             finish();

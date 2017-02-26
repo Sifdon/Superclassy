@@ -126,8 +126,6 @@ public class ViewGroup extends ActionBarActivity implements View.OnClickListener
                     }
                 }
 
-                //System.out.println
-
                 postList.setAdapter(new PostAdapter(ViewGroup.this, titles, urls, descriptions, authors));
             }
 

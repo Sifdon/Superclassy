@@ -50,7 +50,8 @@
         <activity android:name=".ChooseCategory" />
         <activity android:name=".Explore" />
         <activity android:name=".ViewGroup" />
-        <activity android:name=".NewPost"></activity>
+        <activity android:name=".NewPost" />
+        <activity android:name=".ViewPage" />
     </application>
 
 </manifest>

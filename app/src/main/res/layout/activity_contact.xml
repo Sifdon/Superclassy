@@ -81,7 +81,7 @@
             android:id="@+id/send"
             android:layout_below="@+id/messageBox"
             android:layout_centerHorizontal="true"
-            android:theme="@style/orangeButton"/>
+            android:theme="@style/pinkButton"/>
 
     </RelativeLayout>
 </RelativeLayout>

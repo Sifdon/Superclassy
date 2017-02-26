@@ -2,13 +2,17 @@ package clairecw.example.admin.superclassy;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
@@ -25,7 +29,6 @@ import java.util.Map;
 
 public class Groups extends ActionBarActivity implements View.OnClickListener {
 
-    Button uploadButton, homeButton, searchButton, profileButton;
     Button createButton;
     ImageButton refresh;
     ListView list;
@@ -39,21 +42,44 @@ public class Groups extends ActionBarActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groups);
 
-        uploadButton = (Button)findViewById(R.id.uploadButton);
-        uploadButton.setOnClickListener(this);
-        uploadButton.setBackgroundColor(Color.TRANSPARENT);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottom_navigation);
 
-        homeButton = (Button)findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(this);
-        homeButton.setBackgroundColor(Color.TRANSPARENT);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Intent myIntent;
+                        switch (item.getItemId()) {
+                            case R.id.action_home:
+                                myIntent = new Intent(getBaseContext(), Dashboard.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
+                            case R.id.action_search:
+                                myIntent = new Intent(getBaseContext(), Search.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
+                            case R.id.action_upload:
+                                myIntent = new Intent(getBaseContext(), UploadFile.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
+                            case R.id.action_groups:
+                                break;
+                            case R.id.action_account:
+                                myIntent = new Intent(getBaseContext(), AccountEdit.class);
+                                startActivity(myIntent);
+                                finish();
+                                break;
 
-        searchButton = (Button)findViewById(R.id.searchButton);
-        searchButton.setOnClickListener(this);
-        searchButton.setBackgroundColor(Color.TRANSPARENT);
-
-        profileButton = (Button)findViewById(R.id.profileButton);
-        profileButton.setOnClickListener(this);
-        profileButton.setBackgroundColor(Color.TRANSPARENT);
+                        }
+                        return true;
+                    }
+                });
+        View view = bottomNavigationView.findViewById(R.id.action_groups);
+        view.performClick();
 
         createButton = (Button)findViewById(R.id.createButton);
         createButton.setOnClickListener(this);
@@ -80,15 +106,21 @@ public class Groups extends ActionBarActivity implements View.OnClickListener {
         if (user == null) {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
+            finish();
         }
 
         myFirebaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                if (user == null) {
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    Toast.makeText(getBaseContext(), "Error: Please sign in again.", Toast.LENGTH_LONG).show();
+                }
                 groupIds = (ArrayList<String>)snapshot.child("users").child(user.getUid()).child("groups").getValue();
                 if (groupIds != null) {
                     for (String group : groupIds) {
-                        System.out.println(group);
                         nameList.add((String)snapshot.child("groups").child(group).child("name").getValue());
                         switch (((Long)snapshot.child("groups").child(group).child("type").getValue()).intValue()) {
                             case 1: colors.add("#99CC00"); break;
@@ -112,24 +144,6 @@ public class Groups extends ActionBarActivity implements View.OnClickListener {
     }
 
     public void onClick(View v) {
-        if (v == uploadButton) {
-            Intent myIntent = new Intent(this, UploadFile.class);
-            startActivity(myIntent);
-        }
-        if (v == homeButton) {
-            Intent intent = new Intent(this, Dashboard.class);
-            startActivity(intent);
-            finish();
-        }
-        if (v == searchButton) {
-            Intent myIntent = new Intent(this, Search.class);
-            startActivity(myIntent);
-        }
-        if (v == profileButton) {
-            Intent intent = new Intent(this, AccountEdit.class);
-            startActivity(intent);
-            finish();
-        }
         if (v == createButton) {
             Intent intent = new Intent(this, CreateGroup.class);
             startActivity(intent);

@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:text="Post"
         android:id="@+id/button2"
-        android:theme="@style/orangeButton"
+        android:theme="@style/pinkButton"
         android:layout_below="@+id/editText3"
         android:layout_centerHorizontal="true" />
 

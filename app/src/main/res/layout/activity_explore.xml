@@ -15,6 +15,7 @@
         android:textSize="30dp"
         android:text="Explore Cliqd"
         android:id="@+id/textView8"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -26,7 +27,6 @@
         android:text="People"
         android:id="@+id/textView9"
         android:layout_below="@+id/textView8"
-        android:visibility="invisible"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -50,25 +50,113 @@
         android:id="@+id/textView10"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout1"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+        android:layout_below="@+id/scroll1"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView9"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pages"
+        android:id="@+id/textView11"
         android:layout_alignParentLeft="true"
-        android:id="@+id/linearLayout1"
-        android:visibility="invisible"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/scroll2"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
-    </LinearLayout>
-    
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView10">
+        android:layout_below="@+id/textView9"
+        android:id="@+id/scroll1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView9"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/linearLayout1"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/people1"
+                android:textAlignment="center"
+                android:shadowColor="#bbb"
+                android:shadowDx="4"
+                android:shadowDy="4"
+                android:shadowRadius="8"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:textSize="22dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/people2"
+                android:textAlignment="center"
+                android:shadowColor="#bbb"
+                android:shadowDx="4"
+                android:shadowDy="4"
+                android:shadowRadius="8"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:textSize="22dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/people3"
+                android:shadowColor="#bbb"
+                android:shadowDx="4"
+                android:shadowDy="4"
+                android:shadowRadius="8"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="22dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/people4"
+                android:gravity="center"
+                android:shadowColor="#bbb"
+                android:shadowDx="4"
+                android:shadowDy="4"
+                android:shadowRadius="8"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:textSize="22dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin" />
+
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/people5"
+                android:gravity="center"
+                android:shadowColor="#bbb"
+                android:shadowDx="4"
+                android:shadowDy="4"
+                android:shadowRadius="8"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:textSize="22dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView10"
+        android:id="@+id/scroll2">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -83,7 +171,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/green"
-                android:background="@color/green"
+                android:background="@drawable/proj"
                 android:text="Project"
                 android:textAlignment="center"
                 android:gravity="center"
@@ -94,7 +182,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/orange"
-                android:background="@color/lightOrange"
+                android:background="@drawable/sport"
                 android:text="Sports"
                 android:textAlignment="center"
                 android:gravity="center"
@@ -105,7 +193,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/red"
-                android:background="@color/red"
+                android:background="@drawable/biz"
                 android:text="Career"
                 android:gravity="center"
                 android:textSize="22dp"
@@ -115,7 +203,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/blue"
-                android:background="@color/skyBlue"
+                android:background="@drawable/interest"
                 android:text="Misc. Interest"
                 android:gravity="center"
                 android:layout_gravity="center"
@@ -127,15 +215,75 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/purple"
-                android:background="@color/purple"
+                android:background="@drawable/subject"
                 android:text="Academic Subject"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textSize="20dp"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-    
+
         </LinearLayout>
 
     </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView11">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView10"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/organization"
+                android:background="@drawable/org"
+                android:text="Organization"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="12dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/company"
+                android:background="@drawable/com"
+                android:text="Company"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="22dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/school"
+                android:background="@drawable/school"
+                android:text="School"
+                android:gravity="center"
+                android:textSize="22dp" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <ImageButton
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/refresh"
+        android:background="@null"
+        android:id="@+id/refresh"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

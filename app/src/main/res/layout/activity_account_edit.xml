@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
     android:clickable="true"
@@ -51,7 +52,7 @@
                     android:textAlignment="center"
                     android:textColor="#FFF"
                     android:layout_alignParentBottom="true"
-                    android:background="#B3AAAAAA"/>
+                    android:background="@color/grey"/>
 
             </RelativeLayout>
 
@@ -66,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="Log out"
                     android:layout_alignParentRight="true"
-                    android:theme="@style/orangeButton"
+                    android:theme="@style/pinkButton"
                     android:id="@+id/logout"/>
 
                 <TextView
@@ -127,13 +128,13 @@
 
 
             <ImageButton
-                android:layout_height="40dp"
-                android:layout_width="40dp"
+                android:layout_width="30dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/refresh"
                 android:background="@null"
-                android:id="@+id/refreshButton"/>
+                android:id="@+id/refreshButton"
+                android:layout_height="30dp" />
 
             <View
                 android:layout_width="0dp"
@@ -176,59 +177,15 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/nav"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:layout_alignParentBottom="true" />
-
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="45dp"
-        android:id="@+id/uploadButton"
-        android:visibility="visible"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        />
-
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="45dp"
-        android:id="@+id/homeButton"
-        android:visibility="visible"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/linearLayout"
-        android:layout_toLeftOf="@+id/searchButton"
-        android:layout_toStartOf="@+id/searchButton" />
-
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="45dp"
-        android:id="@+id/searchButton"
-        android:visibility="visible"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/uploadButton"
-        android:layout_toStartOf="@+id/uploadButton" />
-
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="45dp"
-        android:id="@+id/groupsButton"
-        android:background="@null"
-        android:visibility="visible"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/uploadButton" />
-
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="45dp"
-        android:id="@+id/profileButton"
-        android:visibility="invisible"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/groupsButton" />
+        app:itemBackground="@color/darkBlue"
+        app:itemIconTint="#fff"
+        app:itemTextColor="#fff"
+        app:menu="@menu/bottom_navigation_main" />
 
 
 </RelativeLayout>

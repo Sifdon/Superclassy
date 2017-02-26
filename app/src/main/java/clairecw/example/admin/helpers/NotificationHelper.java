@@ -8,6 +8,9 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import java.lang.ref.WeakReference;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,20 +61,26 @@ public class NotificationHelper {
         final Firebase myFirebaseRef = new Firebase("https://superclassy.firebaseio.com/");
         AuthData user = myFirebaseRef.getAuth();
 
+        Date currentDate = new Date(System.currentTimeMillis());
+        DateFormat df = new SimpleDateFormat("MMddyyyy");
+
         if (code == 0) {        // new file upload from user account
             Firebase newRef = myFirebaseRef.child("users").child(user.getUid()).child("files").push();
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("url", response.data.link);
             map.put("desc", desc);
+            map.put("date", df.format(currentDate));
+
             newRef.setValue(map);
         }
-        if (code == 1) {        // new post in group
+        else if (code == 1) {        // new post in group
             Firebase newRef = myFirebaseRef.child("groups").child(groupId).child("posts").push();
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("url", response.data.link);
             map.put("description", desc);
             map.put("title", title);
             map.put("author", user.getUid());
+            map.put("date", df.format(currentDate));
             newRef.setValue(map);
         }
         else {                  // profile picture upload
